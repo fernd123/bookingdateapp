@@ -65,7 +65,9 @@ export class LoginPage extends ParentComponent {
           });
           (await alert).present();
         } else {
-          self.loading != undefined ? self.loading.dismiss() : '';
+          setTimeout(function () {
+            self.loading.dismiss();
+          }, 200);
           this.router.navigateByUrl('/userHome');
 
           /*if (self.userProvider.userLoged.isAdmin || self.userProvider.userLoged.isEmployee) {
