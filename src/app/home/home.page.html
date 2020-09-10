@@ -1,0 +1,30 @@
+<ion-menu [content]="contenido">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>
+        Menu
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <button ion-item (click)="loadPage(companyPage)"
+        *ngIf="userProvider.userLoged != undefined && userProvider.userLoged.isAdmin == true">Datos Empresa</button>
+      <button ion-item (click)="loadPage(employeePage)"
+        *ngIf="userProvider.userLoged != undefined && userProvider.userLoged.isAdmin == true">Gestión Empleado</button>
+      <button ion-item (click)="loadPage(servicesPage)"
+        *ngIf="userProvider.userLoged != undefined && userProvider.userLoged.isAdmin == true">Gestión Servicios</button>
+      <button ion-item (click)="loadPage(appointmentPage)"
+        *ngIf="userProvider.userLoged != undefined && userProvider.userLoged.isAdmin == true">Gestión de Citas</button>
+      <button ion-item (click)="loadPage(appointmentCustomerHistoryPage)"
+        *ngIf="userProvider.userLoged != undefined && (userProvider.userLoged.isCustomer == true || userProvider.userLoged.isAdmin == true)">Historial
+        de Citas</button>
+      <button ion-item (click)="loadPage(appointmentCustomerPage)"
+        *ngIf="userProvider.userLoged != undefined &&  (userProvider.userLoged.isCustomer == true || userProvider.userLoged.isAdmin == true)">Reservar
+        Cita</button>
+      <button ion-item (click)="loadPage(loginPage)">Salir</button>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-nav [root]="rootPage" #contenido></ion-nav>

@@ -1,0 +1,80 @@
+<app-header [title]="title" [showLanguage]="false" [showBack]="false"></app-header>
+
+<ion-content>
+
+  <form [formGroup]="form" (submit)="onSubmit()">
+
+    <ion-card>
+
+      <ion-item>
+        <ion-label class="formlabel">{{environment.name}}</ion-label>
+        <ion-input type="text" formControlName="name" required>
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label class="formlabel">{{environment.description}}</ion-label>
+        <ion-input type="text" name="description" formControlName="description" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label class="formlabel">{{environment.duration}}</ion-label>
+        <ion-input type="number" name="duration" formControlName="duration" required>
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label class="formlabel">{{environment.price}}</ion-label>
+        <ion-input type="number" name="price" formControlName="price" required>
+        </ion-input>
+      </ion-item>
+
+
+      <ion-list>
+        <ion-radio-group allow-empty-selection="true" formControlName="genre" #genre>
+          <ion-list-header>
+            <ion-label class="formlabel">{{environment.genre}}</ion-label>
+          </ion-list-header>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label>{{environment.man}}</ion-label>
+                <ion-icon name="man" item-left></ion-icon>
+                <ion-radio value="Hombre"></ion-radio>
+              </ion-item>
+            </ion-col>
+
+            <ion-col>
+              <ion-item>
+                <ion-label>{{environment.woman}}</ion-label>
+                <ion-icon name="woman" item-left></ion-icon>
+                <ion-radio value="Mujer"></ion-radio>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+        </ion-radio-group>
+      </ion-list>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-button expand="block" color="warning" (click)="close()">
+              {{environment.close}}
+            </ion-button>
+          </ion-col>
+          <ion-col *ngIf="this.serviceProvider.serviceSelected != undefined">
+            <ion-button expand="block" color="danger" (click)="removeService()">
+              {{environment.delete}}
+            </ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button expand="block" color="success" type="submit" [disabled]="!form.valid">
+              {{environment.save}}
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+  </form>
+</ion-content>

@@ -1,0 +1,41 @@
+<app-header [title]="title" [showLanguage]="false" [showBack]="true"></app-header>
+
+<ion-content>
+
+  <div>
+    <ion-card *ngFor="let company of this.companyPProvider.companyList" (click)="editCompany(company)">
+      <!-- <img id="img" src="assets/imgs/avatar.png"> -->
+      <ion-card-content>
+        <h1><b>{{ company.name }}</b></h1>
+        <div class="card-title">Info: <i><b>{{ company.info }}</b></i></div>
+        <div class="card-title">Teléfono: <b>{{ company.phone }}</b></div>
+        <div class="card-title">Información: <b>{{ company.info }}</b></div>
+        <div class="card-title">Horario Mañanas: <b>{{ company.initialHourMorning }}:{{ company.initialMinuteMorning ==
+            0 ? '00' : company.initialMinuteMorning }} - {{ company.finalHourMorning }}:{{ company.finalMinuteMorning
+            == 0 ? '00' : company.finalMinuteMorning}}</b></div>
+        <div class="card-title">Horario Tardes: <b>{{ company.initialHourAfternoon }}:{{ company.initialMinuteAfternoon
+            == 0 ? '00' : company.initialMinuteAfternoon }} - {{ company.finalHourAfternoon}}:{{
+            company.finalMinuteAfternoon == 0 ? '00' : company.finalMinuteAfternoon}}</b></div>
+        <div class="card-title">Horario Fin de Semana: <b>{{ company.initialHourWeekend }}:{{
+            company.initialMinuteWeekend == 0 ? '00' : company.initialMinuteWeekend}} -
+            {{company.finalHourWeekend}}:{{company.finalMinuteWeekend == 0 ? '00' : company.finalMinuteWeekend}}</b>
+        </div>
+
+        <ion-card *ngIf="this.companyPProvider.companyList.length == 0" class="background-red">
+          <ion-card-content>
+            <div class="center card-title">
+              <h1 style="color:white">NO NINGÚN RESULTADO</h1>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="addCompany()">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

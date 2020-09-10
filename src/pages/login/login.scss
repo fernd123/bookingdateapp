@@ -1,0 +1,26 @@
+page-login {
+
+
+    #email {
+        border-style: solid;
+        border-color: rgb(71, 71, 71);
+
+      
+    }
+
+    #password {
+        border-style: solid;
+        border-color: rgb(71, 71, 71);
+
+    }
+    
+    #img {
+        border-radius: 50%;
+        width:30%;
+    }
+
+    .fadeIn {
+        animation-name: fadeIn;
+        animation-duration: 1s;
+      }
+}

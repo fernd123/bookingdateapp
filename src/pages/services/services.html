@@ -1,0 +1,31 @@
+<app-header [title]="title" [showLanguage]="false" [showBack]="true"></app-header>
+
+<ion-content>
+
+  <ion-searchbar #searchInputSearchB (ionInput)="onInput($event)" (ionCancel)="onCancel($event)">
+  </ion-searchbar>
+
+  <ion-card *ngFor="let service of this.serviceProvider.serviceList" (click)="editService(service)">
+    <ion-card-content>
+      <h1><b>{{ service.name }}</b></h1>
+      <div class="card-subtitle"><b><i>{{ service.description }}</i></b></div>
+      <div class="card-subtitle">{{environment.duration}}: <b>{{ service.duration }}</b></div>
+      <div class="card-subtitle">{{environment.type}}: <b>{{ service.genre }}</b></div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="this.serviceProvider.serviceList.length == 0" class="background-red">
+    <ion-card-content>
+      <div class="center card-title">
+        <h1 class="color-white">{{environment.noresult}}</h1>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="addService()">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

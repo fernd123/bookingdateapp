@@ -1,0 +1,97 @@
+<app-header [title]="title" [showLanguage]="false" [showBack]="false"></app-header>
+
+<ion-content>
+
+  <form [formGroup]="form" (submit)="onSubmit()">
+    <div>
+      <ion-card>
+
+        <ion-item>
+          <ion-label class="formlabel">{{environment.name}}</ion-label>
+          <ion-input class="ion-text-right" type="text" formControlName="name"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label class="formlabel">{{environment.lastname}}</ion-label>
+          <ion-input class="ion-text-right" type="text" formControlName="lastname"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label class="formlabel">{{environment.phone}}</ion-label>
+          <ion-input class="ion-text-right" type="text" formControlName="phone"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label class="formlabel">{{environment.password}}</ion-label>
+          <ion-input class="ion-text-right" type="password" formControlName="password"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label class="formlabel">{{environment.email}}</ion-label>
+          <ion-input class="ion-text-right" type="email" formControlName="email"></ion-input>
+        </ion-item>
+
+        <ion-list>
+          <ion-radio-group allow-empty-selection="true" formControlName="genre" #genre>
+            <ion-list-header>
+              <ion-label class="formlabel">{{environment.genre}}</ion-label>
+            </ion-list-header>
+            <ion-row>
+              <ion-col>
+                <ion-item>
+                  <ion-label>{{environment.man}}</ion-label>
+                  <ion-icon name="man" item-left></ion-icon>
+                  <ion-radio value="Hombre"></ion-radio>
+                </ion-item>
+              </ion-col>
+
+              <ion-col>
+                <ion-item>
+                  <ion-label>{{environment.woman}}</ion-label>
+                  <ion-icon name="woman" item-left></ion-icon>
+                  <ion-radio value="Mujer"></ion-radio>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+
+          </ion-radio-group>
+        </ion-list>
+
+        <ion-item>
+          <ion-label>{{environment.userAdmin}}</ion-label>
+          <ion-checkbox name="isAdmin" value="true" formControlName="isAdmin"></ion-checkbox>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>{{environment.userActive}}</ion-label>
+          <ion-checkbox name="isActive" value="true" formControlName="isActive"></ion-checkbox>
+        </ion-item>
+
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-button expand="block" color="warning" (click)="close()">
+                {{environment.close}}
+              </ion-button>
+            </ion-col>
+
+            <ion-col *ngIf="this.userProvider.userSelected != undefined && isNotMe()">
+              <ion-button expand="block" color="danger" (click)="removeEmployee()">
+                {{environment.delete}}
+              </ion-button>
+            </ion-col>
+
+            <ion-col>
+              <ion-button expand="block" color="success" type="submit" [disabled]="!form.valid">
+                {{environment.save}}
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+      </ion-card>
+    </div>
+
+
+  </form>
+</ion-content>

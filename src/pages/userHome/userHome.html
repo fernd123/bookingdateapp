@@ -1,0 +1,64 @@
+<app-header [title]="title" [showLanguage]="false" [showBack]="false"></app-header>
+
+
+<ion-content [fullscreen]="true">
+
+  <ion-grid>
+    <ion-row *ngIf="userProvider.userLoged != undefined && userProvider.userLoged.isAdmin == true">
+      <ion-col>
+        <ion-button color="favorite" expand="block" class="menuButton" [routerLink]="['/companyinfo']">
+          {{environment.infoCompanyLbl}}
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="userProvider.userLoged != undefined && userProvider.userLoged.isAdmin == true">
+      <ion-col>
+        <ion-button color="favorite" expand="block" class="menuButton" [routerLink]="['/employee']">
+          {{environment.employeeLbl}}
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="userProvider.userLoged != undefined && userProvider.userLoged.isAdmin == true">
+      <ion-col>
+        <ion-button color="favorite" expand="block" class="menuButton" [routerLink]="['/appointment']">
+          {{environment.appointmentLbl}}
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="userProvider.userLoged != undefined && userProvider.userLoged.isAdmin == true">
+      <ion-col>
+        <ion-button color="favorite" expand="block" class="menuButton" [routerLink]="['/services']">
+          {{environment.servicesLbl}}
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-button color="favorite" expand="block" class="menuButton" [routerLink]="['/customer-appointment']">
+          {{environment.bookAppointmentLbl}}
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-button color="favorite" expand="block" class="menuButton"
+          [routerLink]="['/customer-appointment-historical']">{{environment.myappointmentsLbl}}
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-button color="favorite" expand="block" class="menuButtonLogout" (click)="logout()">{{environment.logout}}
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+
+</ion-content>

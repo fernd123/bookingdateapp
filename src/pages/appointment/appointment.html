@@ -1,0 +1,139 @@
+<app-header [title]="title" [showLanguage]="false" [showBack]="true"></app-header>
+
+<ion-content padding>
+  <ion-grid>
+
+    <ion-row *ngIf="!hideOptions">
+      <ion-col>
+        <ion-button expand="block" class="menuButton" color="light" (click)="showGenerateMeeting()">
+          {{environment.generateAppointment}}
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="!hideOptions">
+      <ion-col>
+        <ion-button expand="block" class="menuButton" color="light" (click)="searchMeeting()">
+          {{environment.searchAppointment}}
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="!hideOptions">
+      <ion-col>
+        <ion-button expand="block" class="menuButton" color="light" (click)="showAllMeetings()">
+          {{environment.showAllAppointments}}
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div *ngIf="showGenerateMeetingContent">
+
+    <form [formGroup]="form" (submit)="onSubmit()">
+
+      <ion-card>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label class="formlabel">{{environment.startDate}}</ion-label>
+              <ion-datetime class="date ion-text-right" displayFormat="DD/MM/YYYY" name="initialDate"
+                formControlName="initialDateModel"></ion-datetime>
+            </ion-item>
+          </ion-col>
+
+          <ion-col>
+            <ion-item>
+              <ion-label class="formlabel">{{environment.endDate}}</ion-label>
+              <ion-datetime class="date ion-text-right" displayFormat="DD/MM/YYYY" name="finalDate"
+                formControlName="finalDateModel"></ion-datetime>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label class="formlabel">{{environment.company}}</ion-label>
+              <ion-select name="company" formControlName="company" class="date"
+                style="text-align: left; max-width: 100%">
+                <ion-select-option *ngFor="let c of this.companyList" [value]="c">{{c.name}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label class="formlabel">{{environment.excludeDays}}:
+                <i>{{company != undefined ? company.noWorkingDays: ""}}</i>
+              </ion-label>
+              <ion-checkbox name="excludeNoWorkingDays" value="true" formControlName="excludeNoWorkingDays">
+              </ion-checkbox>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-button expand="block" color="warning" (click)="showGenerateMeeting()">
+                <ion-icon name="arrow-back"></ion-icon>
+                {{environment.back}}
+              </ion-button>
+            </ion-col>
+
+            <ion-col>
+              <ion-button expand="block" color="secondary" (click)="generateAppointment()" [disabled]="!form.valid">
+                {{environment.generateAppointment}}
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+      </ion-card>
+    </form>
+
+  </div>
+
+
+  <div *ngIf="showAllMeetingsContent">
+    <ion-row style="position: sticky; top: 0;
+    left: 100%;
+    right: 0;
+    z-index: 9999;">
+      <ion-col>
+        <ion-button expand="block" color="warning" (click)="showAllMeetings()">
+          <ion-icon name="arrow-back"></ion-icon>
+          {{environment.back}}
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+    <div>
+      <ion-card *ngFor="let appointment of this.appointmentPProvider.appointmentList">
+        <ion-card-content>
+          <h1><b>{{environment.date}}: {{appointment.date | date: 'dd/MM/yyyy'}}</b></h1>
+          <h2><b>{{appointment.initialHour == 0 ? '00' : appointment.initialHour}}:{{appointment.initialMinute == 0 ? '00' : appointment.initialMinute}}
+              -
+              {{appointment.finalHour == 0 ? '00' : appointment.finalHour}}:{{appointment.finalMinute == 0 ? '00' : appointment.finalMinute}}</b>
+          </h2>
+          <div *ngIf="appointment.customerId != ''">
+            <div class="card-title">{{environment.customer}}: {{appointment.customerId}}</div>
+            <div class="card-title">{{environment.service}}: {{appointment.serviceId}}</div>
+            <div class="card-title">{{environment.employee}}: {{appointment.employeeId}}</div>
+            <div class="card-title">{{environment.observations}}: {{appointment.observations}}</div>
+          </div>
+
+          <div *ngIf="appointment.customerId == undefined">
+            <b>
+              <h1 style="color:green">{{environment.avaiable}}</h1>
+            </b>
+          </div>
+
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

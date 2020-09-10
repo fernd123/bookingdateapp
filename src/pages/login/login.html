@@ -1,0 +1,43 @@
+<app-header [title]="title" [showLanguage]="false" [showBack]="false"></app-header>
+
+<ion-content>
+
+  <form [formGroup]="form" (submit)="onSubmit()">
+    <ion-card>
+
+      <img src="../../assets/images/samplelogo.jpg" height="200" width="250" class="center" style="margin-top: 10px;">
+
+
+      <ion-item>
+        <ion-label class="formlabel">{{environment.email}}</ion-label>
+        <ion-input class="ion-text-right" type="email" formControlName="email"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label class="formlabel">{{environment.password}}</ion-label>
+        <ion-input class="ion-text-right" type="password" formControlName="password"></ion-input>
+      </ion-item>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-button expand="block" color="success" (click)="login()" [disabled]="!form.valid">
+              {{environment.initSession}}
+            </ion-button>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-button expand="block" color="tertiary" (click)="register()">
+              {{environment.register}}
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+    </ion-card>
+  </form>
+
+
+</ion-content>

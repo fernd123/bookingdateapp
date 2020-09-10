@@ -1,0 +1,14 @@
+<ion-header>
+  <ion-toolbar class="new-background-color">
+    <ion-title>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-icon *ngIf="showBack == true" name="arrow-back" (click)="back()"></ion-icon>
+            {{title}}
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>

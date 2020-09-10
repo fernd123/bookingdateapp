@@ -1,0 +1,105 @@
+<app-header [title]="title" [showLanguage]="false" [showBack]="true"></app-header>
+
+<ion-content>
+
+  <form [formGroup]="form" (submit)="onSubmit()">
+
+    <ion-card>
+
+      <ion-list>
+        <ion-radio-group allow-empty-selection="true" formControlName="genre" #genre>
+          <ion-list-header>
+            <ion-label class="formlabel">{{environment.genre}}</ion-label>
+          </ion-list-header>
+          <ion-row>
+            <ion-col>
+              <ion-item (click)="getServicesByGenre('Hombre')">
+                <ion-label>{{environment.man}}</ion-label>
+                <ion-icon name="man" item-left></ion-icon>
+                <ion-radio value="Hombre"></ion-radio>
+              </ion-item>
+            </ion-col>
+
+            <ion-col>
+              <ion-item>
+                <ion-label>{{environment.woman}}</ion-label>
+                <ion-icon name="woman" item-left></ion-icon>
+                <ion-radio (click)="getServicesByGenre('Mujer')" value="Mujer"></ion-radio>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+        </ion-radio-group>
+      </ion-list>
+
+
+      <ion-item>
+        <ion-label class="formlabel">{{environment.service}}</ion-label>
+        <ion-select name="service" formControlName="service" style="text-align: left; max-width: 100%" required>
+          <ion-select-option *ngFor="let service of this.serviceList" [value]="service">{{service.name}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>{{environment.date}}</ion-label>
+        <ion-datetime displayFormat="DD/MM/YYYY" name="date" formControlName="dateModel" required></ion-datetime>
+      </ion-item>
+      <ion-grid>
+
+        <ion-row>
+          <!--<ion-col>
+            <ion-button color="warning" (click)="showResult = !showResult">
+              <ion-icon name="arrow-back-outline"></ion-icon>
+              Volver
+            </ion-button>
+          </ion-col>-->
+
+          <ion-col>
+            <ion-button color="secondary" (click)="searchAvaiableAppointments()" [disabled]="!form.valid">
+              <ion-icon name="search"></ion-icon>
+              {{environment.searchAppointment}}
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+  </form>
+
+  <div *ngIf="showResult">
+
+    <div *ngIf="(this.avaiableAppointmentList)?.length!=0">
+      <ion-card #appointmentCard *ngFor="let appointment of this.avaiableAppointmentList">
+        <ion-card-content (click)="bookAppointment(appointment, appointmentCard)">
+          <h1><b>{{environment.date}}: {{appointment.date | date: 'dd/MM/yyyy'}}</b></h1>
+          <h6><b><i>{{appointment.date }}</i></b></h6>
+          <h2><b>{{appointment.initialHour == 0 ? '00' : appointment.initialHour}}:{{appointment.initialMinute == 0 ?
+              '00' : appointment.initialMinute}} -
+              {{appointment.finalHour == 0 ? '00' : appointment.finalHour}}:{{appointment.finalMinute == 0 ? '00' :
+              appointment.finalMinute}}</b></h2>
+          <div *ngIf="appointment.customerId == undefined">
+            <b>
+              <h1 style="color:green">{{environment.avaiable}}</h1>
+            </b>
+          </div>
+          <div *ngIf="appointment.customerId != undefined">
+            <b>
+              <h1 style="color:firebrick">{{environment.notavaiable}}</h1>
+            </b>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <div *ngIf="(this.avaiableAppointmentList)?.length==0 && this.loadingContent == false">
+      <ion-card style="background: firebrick; padding: 10px">
+        <div class="center card-title">
+          <h2 style="color:white">{{environment.noavaiabilityLbl}}</h2>
+        </div>
+      </ion-card>
+    </div>
+  </div>
+
+
+
+</ion-content>

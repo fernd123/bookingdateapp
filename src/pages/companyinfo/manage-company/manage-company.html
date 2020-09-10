@@ -1,0 +1,183 @@
+<app-header [title]="title" [showLanguage]="false" [showBack]="false"></app-header>
+
+<ion-content>
+
+  <form [formGroup]="form" (submit)="onSubmit()">
+
+    <ion-card>
+
+      <ion-row>
+        <ion-col>
+          <ion-label>Logo empresa</ion-label>
+        </ion-col>
+      </ion-row>
+
+
+      <ion-item>
+        <ion-label class="formlabel">{{environment.name}}</ion-label>
+        <ion-input type="text" formControlName="name" required>
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label class="formlabel">{{environment.phone}}</ion-label>
+        <ion-input type="text" formControlName="phone" required>
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label class="formlabel">{{environment.info}}</ion-label>
+        <ion-input type="text" formControlName="info" required>
+        </ion-input>
+      </ion-item>
+
+      <ion-label>{{environment.morningSchedule}}</ion-label>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label class="formlabel">{{environment.initialHour}}</ion-label>
+            <ion-input type="text" formControlName="initialHourMorning" required>
+            </ion-input>
+          </ion-item>
+        </ion-col>
+
+        <ion-col>
+          <ion-item>
+            <ion-label class="formlabel">{{environment.minutes}}</ion-label>
+            <ion-input type="text" formControlName="initialMinuteMorning" required>
+            </ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label class="formlabel">{{environment.endHour}}</ion-label>
+            <ion-input type="text" formControlName="finalHourMorning" required>
+            </ion-input>
+          </ion-item>
+        </ion-col>
+
+        <ion-col>
+          <ion-item>
+            <ion-label class="formlabel">{{environment.minutes}}</ion-label>
+            <ion-input type="text" formControlName="finalMinuteMorning" required>
+            </ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-label>{{environment.afternoonSchedule}}</ion-label>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label class="formlabel">{{environment.initialHour}}</ion-label>
+            <ion-input type="text" formControlName="initialHourAfternoon" required>
+            </ion-input>
+          </ion-item>
+        </ion-col>
+
+        <ion-col>
+          <ion-item>
+            <ion-label class="formlabel">{{environment.minutes}}</ion-label>
+            <ion-input type="text" formControlName="initialMinuteAfternoon" required>
+            </ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label class="formlabel">{{environment.endHour}}</ion-label>
+            <ion-input type="text" formControlName="finalHourAfternoon" required>
+            </ion-input>
+          </ion-item>
+        </ion-col>
+
+        <ion-col>
+          <ion-item>
+            <ion-label class="formlabel">{{environment.minutes}}</ion-label>
+            <ion-input type="text" formControlName="finalMinuteAfternoon" required>
+            </ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-label>{{environment.weekendSchedule}}</ion-label>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label class="formlabel">{{environment.initialHour}}</ion-label>
+            <ion-input type="text" formControlName="initialHourWeekend" required>
+            </ion-input>
+          </ion-item>
+        </ion-col>
+
+        <ion-col>
+          <ion-item>
+            <ion-label class="formlabel">{{environment.minutes}}</ion-label>
+            <ion-input type="text" formControlName="initialMinuteWeekend" required>
+            </ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label class="formlabel">{{environment.endHour}}</ion-label>
+            <ion-input type="text" formControlName="finalHourWeekend" required>
+            </ion-input>
+          </ion-item>
+        </ion-col>
+
+        <ion-col>
+          <ion-item>
+            <ion-label class="formlabel">{{environment.minutes}}</ion-label>
+            <ion-input type="text" formControlName="finalMinuteWeekend" required>
+            </ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <!--<ion-item>
+        <ion-label>Días de la semana no Laborables</ion-label>
+        <ion-select formControlName="noWorkingDays" multiple="true">
+          <ion-select-option>Lunes</ion-select-option>
+          <ion-select-option>Martes</ion-select-option>
+          <ion-select-option>Miércoles</ion-select-option>
+          <ion-select-option>Jueves</ion-select-option>
+          <ion-select-option>Viernes</ion-select-option>
+          <ion-select-option>Sábado</ion-select-option>
+          <ion-select-option>Domingo</ion-select-option>
+        </ion-select>
+      </ion-item>-->
+
+      <ion-item>
+        <ion-label>{{environment.companyActive}}</ion-label>
+        <ion-checkbox name="isActive" value="true" formControlName="isActive">
+        </ion-checkbox>
+      </ion-item>
+
+
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-button expand="block" color="warning" (click)="close()">
+              {{environment.close}}
+            </ion-button>
+          </ion-col>
+
+          <ion-col>
+            <ion-button expand="block" color="success" type="submit" [disabled]="!form.valid">
+              {{environment.save}}
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+  </form>
+
+</ion-content>
